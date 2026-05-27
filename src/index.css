@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #001020;
+  --color-accent: #2f55f1;
+  --color-white: #ffffff;
+  --color-secondary: #0f1b64;
+  --color-warm: #ebbab9;
+}
+
+@layer utilities {
+  .glass-dark {
+    @apply bg-secondary/30 backdrop-blur-xl border border-accent/20;
+  }
+  .glass-light {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+  .glass-accent {
+    @apply bg-accent/90 backdrop-blur-xl border border-white/20 text-white shadow-xl shadow-accent/20;
+  }
+  .glow-spot-blue {
+    @apply absolute bg-accent/20 rounded-full blur-[120px] pointer-events-none;
+  }
+  .glow-spot-warm {
+    @apply absolute bg-warm/10 rounded-full blur-[100px] pointer-events-none;
+  }
+}
+
+body {
+  @apply font-sans text-primary bg-white selection:bg-accent selection:text-white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  background: #0f1b64;
+  border-radius: 4px;
+}
