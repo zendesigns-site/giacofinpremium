@@ -1,5 +1,6 @@
 import { T } from '../data';
 import { ArrowRight, Star, Quote } from 'lucide-react';
+import VideoSection from '../components/VideoSection';
 
 export default function Layout2() {
   return (
@@ -21,7 +22,7 @@ export default function Layout2() {
               Prendi decisioni finanziarie più consapevoli e vincenti.
             </h2>
             <h1 className="text-6xl lg:text-[6.5rem] font-display font-bold leading-[1.05] tracking-tight mb-10 text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 drop-shadow-sm">
-              Studio Giacomelli <span className="text-3xl lg:text-5xl align-middle opacity-50 block mt-4 font-medium">(o Giacofin)</span>
+              Studio Giacomelli
             </h1>
             <div className="text-xl font-light opacity-90 leading-relaxed mb-12 space-y-4 max-w-3xl">
               <p>Lo Studio Giacomelli affianca privati e famiglie nella gestione di investimenti, fiscalità e previdenza, con un approccio indipendente e integrato.</p>
@@ -40,7 +41,12 @@ export default function Layout2() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5 flex flex-col justify-center">
             <h2 className="text-4xl font-display font-bold mb-6 text-primary">Il Problema</h2>
-            <p className="text-xl leading-relaxed mb-10 text-primary">{T.problema.text}</p>
+            <img 
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800" 
+              alt="Architettura direzionale" 
+              className="w-full h-48 object-cover rounded-3xl mb-8 shadow-lg"
+            />
+            <p className="text-xl leading-relaxed mb-8 text-primary">{T.problema.text}</p>
             <div className="flex flex-col gap-4">
               {T.problema.cols.map((col, idx) => (
                 <div key={idx} className="bg-secondary text-white p-6 rounded-xl border-l-4 border-l-warm relative overflow-hidden">
@@ -107,8 +113,13 @@ export default function Layout2() {
                 {T.olistico.cta}
               </button>
             </div>
-            <div className="relative order-1 lg:order-2">
-              <div className="bg-secondary text-white p-12 rounded-[3rem] relative z-10 border border-white/10 shadow-2xl overflow-hidden aspect-square flex flex-col justify-center">
+            <div className="relative order-1 lg:order-2 flex flex-col gap-6 h-full">
+              <img 
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" 
+                alt="Finanza e metodo olistico" 
+                className="w-full h-64 lg:h-auto lg:flex-1 object-cover rounded-[3rem] shadow-xl"
+              />
+              <div className="bg-secondary text-white p-10 lg:p-12 rounded-[3rem] relative z-10 border border-white/10 shadow-2xl overflow-hidden flex flex-col justify-center">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-accent/40 rounded-full blur-[60px]" />
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-warm/20 rounded-full blur-[60px]" />
                 <Star className="text-warm mb-8 relative z-10" size={48} />
@@ -165,16 +176,35 @@ export default function Layout2() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-               {T.servizi.list.map((srv, idx) => (
-                  <div key={idx} className="bg-secondary text-white p-8 rounded-3xl border-t border-t-white/10 relative overflow-hidden shadow-xl flex flex-col">
-                     <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-accent/30 rounded-full blur-[40px]" />
-                     <h4 className="font-display font-bold text-xl mb-4 relative z-10">{srv.title}</h4>
-                     <p className="relative z-10 text-sm opacity-80 mb-6 flex-grow">{srv.desc}</p>
-                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-warm relative z-10 mt-auto">
-                       <ArrowRight size={20} />
+               {T.servizi.list.map((srv, idx) => {
+                 const imgs = [
+                   "1454165804606-c3d57bc86b40",
+                   "1611974789855-9c2a0a7236a3",
+                   "1532619675605-1ede6c2ed2b0",
+                   "1505664115599-2826c71be399",
+                   "1554224155-8d04cb21cd6c",
+                   "1511895426328-dc8714191300"
+                 ];
+                 return (
+                  <div key={idx} className="bg-secondary text-white rounded-3xl border-t border-t-white/10 relative overflow-hidden shadow-xl flex flex-col group">
+                     <div className="h-48 overflow-hidden relative">
+                       <div className="absolute inset-0 bg-secondary/20 group-hover:bg-transparent transition duration-500 z-10" />
+                       <img 
+                          src={`https://images.unsplash.com/photo-${imgs[idx]}?auto=format&fit=crop&q=80&w=600`}
+                          alt={srv.title}
+                          className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition duration-700 group-hover:scale-105"
+                       />
+                     </div>
+                     <div className="p-8 flex flex-col flex-grow relative z-20">
+                       <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-accent/30 rounded-full blur-[40px] pointer-events-none" />
+                       <h4 className="font-display font-bold text-xl mb-4">{srv.title}</h4>
+                       <p className="text-sm opacity-80 mb-6 flex-grow">{srv.desc}</p>
+                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-warm mt-auto group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                         <ArrowRight size={20} />
+                       </div>
                      </div>
                   </div>
-               ))}
+               )})}
             </div>
             <div className="flex flex-wrap gap-8 mt-12 justify-center lg:justify-start">
               {T.servizi.links.map((link, idx) => (
@@ -186,6 +216,9 @@ export default function Layout2() {
          </div>
       </section>
 
+      {/* VIDEO */}
+      <VideoSection />
+
       {/* 8. INDIPENDENZA */}
       <section className="py-24 max-w-7xl mx-auto px-6 lg:px-12 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -194,9 +227,14 @@ export default function Layout2() {
               {T.indipendenza.title}
             </h2>
             <div className="w-24 h-1 bg-accent mb-8" />
-            <p className="text-xl leading-relaxed text-primary/80">
+            <p className="text-xl leading-relaxed text-primary/80 mb-8">
               {T.indipendenza.text1}
             </p>
+            <img 
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+              alt="Professionista indipendente" 
+              className="w-full h-64 object-cover rounded-3xl shadow-lg"
+            />
           </div>
           <div className="space-y-8">
             <div className="bg-secondary text-white p-8 lg:p-10 rounded-3xl relative overflow-hidden shadow-xl">
@@ -267,13 +305,35 @@ export default function Layout2() {
             </div>
             
             <div className="lg:col-span-6 lg:pl-10">
-               <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6">
-                  {T.target.benefici.map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 border-b border-white/10 pb-4">
-                      <span className="text-warm font-bold opacity-50">0{i + 1}</span>
-                      <span className="font-semibold text-[17px]">{item}</span>
-                    </div>
-                  ))}
+               <div className="relative">
+                 {/* Spline luminosa verticale passante per i nodi */}
+                 <div className="absolute left-[23px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-transparent via-accent/80 to-transparent blur-[2px]" />
+                 <div className="absolute left-[24px] top-8 bottom-8 w-px bg-gradient-to-b from-transparent via-white/50 to-transparent" />
+                 
+                 <div className="space-y-4 relative z-10">
+                    {T.target.benefici.map((item, i) => (
+                      <div key={i} className="flex items-center gap-5 lg:gap-8 group">
+                        
+                        {/* Nodo centrale timeline */}
+                        <div className="w-12 h-12 rounded-full bg-primary border-2 border-white/20 flex items-center justify-center shrink-0 z-10 group-hover:border-accent group-hover:shadow-[0_0_20px_rgba(47,85,241,0.5)] transition-all duration-500 relative">
+                           <div className="w-2.5 h-2.5 rounded-full bg-white/30 group-hover:bg-warm transition-colors duration-500 shadow-[0_0_10px_rgba(245,166,35,0)] group-hover:shadow-[0_0_10px_rgba(245,166,35,0.8)]" />
+                        </div>
+                        
+                        {/* Card Premium */}
+                        <div className="flex-grow bg-white/5 border border-white/10 p-5 rounded-2xl backdrop-blur-md group-hover:bg-white/10 group-hover:border-accent/40 transition-all duration-500 relative overflow-hidden flex items-center gap-5 cursor-default translate-x-0 group-hover:translate-x-2">
+                           <div className="absolute -left-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-accent/0 group-hover:bg-accent/20 rounded-full blur-2xl transition-colors duration-700 pointer-events-none" />
+                           
+                           <span className="text-warm/50 font-display font-bold text-xl group-hover:text-warm transition-colors duration-500 relative z-10">
+                             0{i + 1}
+                           </span>
+                           <span className="font-medium text-[16px] lg:text-[17px] text-white/80 group-hover:text-white transition-colors duration-500 relative z-10">
+                             {item}
+                           </span>
+                        </div>
+                        
+                      </div>
+                    ))}
+                 </div>
                </div>
             </div>
           </div>
