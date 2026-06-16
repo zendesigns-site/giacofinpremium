@@ -1,7 +1,7 @@
 export const T = {
   hero: {
     title: "Organizza il tuo patrimonio. Prendi decisioni finanziarie più consapevoli e vincenti.",
-    subtitle: "Studio Giacomelli (o Giacofin). Lo Studio Giacomelli affianca privati e famiglie nella gestione di investimenti, fiscalità e previdenza, con un approccio indipendente e integrato. Perché le scelte finanziarie funzionano davvero solo quando sono coordinate tra loro.",
+    subtitle: "Studio Giacomelli. Lo Studio Giacomelli affianca privati e famiglie nella gestione di investimenti, fiscalità e previdenza, con un approccio indipendente e integrato. Perché le scelte finanziarie funzionano davvero solo quando sono coordinate tra loro.",
     cta: "Prenota una call conoscitiva."
   },
   problema: {
