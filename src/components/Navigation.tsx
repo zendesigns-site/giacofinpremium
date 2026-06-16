@@ -1,41 +1,85 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
-export default function Navigation() {
-  // useLocation ci dice in quale URL ci troviamo attualmente
-  const location = useLocation();
-
-  // Associamo il nome di ogni tab al suo URL (devono corrispondere a quelli in App.tsx)
-  const tabs = [
-    { name: 'Home 1', path: '/' },
-    { name: 'Home 2', path: '/pagina-2' },
-    { name: 'Home 3', path: '/pagina-3' },
-    { name: 'Home 4', path: '/pagina-4' },
-    { name: 'Home 5', path: '/pagina-5' }
-  ];
+export default function Navigation({ currentTab, setCurrentTab }: { currentTab: number, setCurrentTab: (val: number) => void }) {
+  const tabs = ['Home 1', 'Home 2'];
   
+  const menuItems = [
+    { label: 'Home', active: true },
+    { label: 'Chi Sono' },
+    { label: 'Privati', hasDropdown: true },
+    { label: 'Aziende' },
+    { label: 'Formazione' },
+    { label: 'Contenzioso' },
+    { label: 'Video e Guide' },
+    { label: 'Blog' },
+    { label: 'Informazioni', hasDropdown: true },
+    { label: 'Contatti' },
+  ];
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.style.display = 'none';
+    const nextSibling = e.currentTarget.nextElementSibling as HTMLElement;
+    if (nextSibling) {
+      nextSibling.style.display = 'block';
+    }
+  };
+
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="glass-light px-2 py-2 rounded-full flex gap-2">
-        {tabs.map((tab, idx) => {
-          // Controlliamo se l'URL attuale è uguale al path di questo specifico bottone
-          const isActive = location.pathname === tab.path;
+    <>
+      <header className="fixed top-0 inset-x-0 bg-white z-[100] border-b border-gray-100 shadow-sm py-4 lg:py-0">
+        <div className="max-w-[1600px] mx-auto px-6 lg:h-[90px] flex items-center justify-between">
+          <div className="flex items-center">
+            {/* Logo from attachment - falls back to styled text if image not found in public folder */}
+            <img 
+              src="/logo.png" 
+              alt="Giacomelli" 
+              className="h-10 lg:h-12 object-contain" 
+              onError={handleImageError}
+            />
+            <span 
+              className="hidden font-serif text-[2.5rem] tracking-tight text-[#6d6b67] leading-none" 
+              style={{ fontFamily: '"Playfair Display", "Times New Roman", serif' }}
+            >
+              Giacomelli
+            </span>
+          </div>
           
-          return (
-            <Link
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+            {menuItems.map((item, idx) => (
+              <a 
+                key={idx}
+                href="#"
+                className={`flex items-center gap-1.5 text-[0.95rem] font-semibold transition-colors ${
+                  item.active ? 'text-[#2a52de]' : 'text-[#121a3f] hover:text-[#2a52de]'
+                }`}
+              >
+                {item.label}
+                {item.hasDropdown && <ChevronDown size={14} className="stroke-[2.5]" />}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      {/* DEV HELPER: layout switcher */}
+      <div className="fixed bottom-6 left-6 z-[100] bg-white p-1 rounded-full shadow-lg border border-gray-200 opacity-50 hover:opacity-100 transition-opacity">
+        <div className="flex gap-1">
+          {tabs.map((tab, idx) => (
+            <button
               key={idx}
-              to={tab.path}
-              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${
-                isActive 
-                  ? 'bg-accent text-white shadow-lg shadow-accent/30' 
-                  : 'text-primary hover:bg-gray-100'
+              onClick={() => setCurrentTab(idx)}
+              className={`px-4 py-2 rounded-full font-medium text-xs transition-all duration-300 ${
+                currentTab === idx 
+                  ? 'bg-[#2a52de] text-white shadow-md' 
+                  : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              {tab.name}
-            </Link>
-          );
-        })}
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
